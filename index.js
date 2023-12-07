@@ -57,5 +57,16 @@ app.post("/add", async(req,res)=>{
     }
 })
 
+
+app.patch("/update/:id", async(req,res)=>{
+    try {
+        const id = req.params.id
+        const data = req.body
+        let item = await Item.findOneAndUpdate({_id: id}, data,{returnOriginal: false})
+        return res.status(200).json({message: `Succesfully updated item!`, data: item})
+    } catch (error) {
+        return res.status(500).json({error: error, message: `Error adding item!`})
+    }
+})
 const port = 3001
 app.listen(port, ()=>console.log(`Server is started on port ${port}`))
