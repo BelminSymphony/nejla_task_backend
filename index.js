@@ -3,6 +3,8 @@ const cors = require("cors")
 const { default: mongoose, mongo } = require("mongoose")
 const categoryController = require("./controllers/category")
 const jobController = require("./controllers/jobPost")
+const userController = require("./controllers/user")
+const auth = require("./middleware/auth")
 
 const app = express()
 app.use(express.json())
@@ -18,7 +20,8 @@ db.once("open", ()=>{
 
 
 app.use("/category", categoryController)
-app.use("/jobpost", jobController)
+app.use("/jobpost",auth, jobController)
+app.use("/user", userController)
 
 
 const port = 3001
