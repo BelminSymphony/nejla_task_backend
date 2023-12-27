@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const JobSchema = mongoose.Schema({
     companyName: {
@@ -14,11 +14,13 @@ const JobSchema = mongoose.Schema({
         required: true
     },
     jobCategory: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'JobCategory',
         required: true
     },
     jobType: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'JobType',
         required: true
     },
     jobLocation: {
@@ -45,8 +47,8 @@ const JobSchema = mongoose.Schema({
         type: String,
         required: true
     },
-})
+});
 
-const JobPost = mongoose.model("JobPost", JobSchema)
+const JobPost = mongoose.model("JobPost", JobSchema);
 
-module.exports = JobPost
+module.exports = JobPost;
