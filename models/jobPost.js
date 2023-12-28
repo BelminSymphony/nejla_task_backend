@@ -15,7 +15,7 @@ const JobSchema = mongoose.Schema({
     },
     jobCategory: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'JobCategory',
+        ref: 'Category',
         required: true
     },
     jobType: {

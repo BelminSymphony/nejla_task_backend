@@ -17,7 +17,7 @@ router.post("/add", async(req,res)=>{
 
 router.get("/load",async (req,res)=>{
   try {
-      let tasks = await JobPost.find()
+      let tasks = await JobPost.find().populate("jobType").populate("jobCategory")
       return res.status(200).json({data:tasks})
   } catch (error) {
       return res.status(500).json({error:error, message: "Error loading all job posts!"})
@@ -27,7 +27,7 @@ router.get("/load",async (req,res)=>{
 router.get("/load/:id", async(req,res)=>{
   try {
       const id = req.params.id
-      let task = await JobPost.findById(id)
+      let task = await JobPost.findById(id).populate("jobType").populate("jobCategory")
       if(!task){
           return res.status(200).json({ message: `No JobPost with id: ${id}`})
       }
