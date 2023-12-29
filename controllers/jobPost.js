@@ -23,6 +23,15 @@ router.get("/load",async (req,res)=>{
       return res.status(500).json({error:error, message: "Error loading all job posts!"})
   }
 })
+router.post("/search",async (req,res)=>{
+    try {
+        const {title} = req.body
+        let tasks = await JobPost.find({ jobTitle: { $regex: new RegExp(title, 'i') } }).populate("jobType").populate("jobCategory")
+        return res.status(200).json({data:tasks})
+    } catch (error) {
+        return res.status(500).json({error:error, message: "Error Searching jobs!"})
+    }
+  })
 
 router.get("/load/:id", async(req,res)=>{
   try {
